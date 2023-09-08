@@ -3,7 +3,7 @@ package com.granados.customer;
 import java.util.List;
 import java.util.Optional;
 
-public interface CustomerDAO {
+public interface CustomerDao {
 
     List<Customer> selectAllCustomers();
     Optional<Customer> selectCustomerById(Integer customerId);

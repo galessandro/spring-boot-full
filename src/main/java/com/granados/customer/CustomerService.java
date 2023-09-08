@@ -11,9 +11,9 @@ import java.util.List;
 @Service
 public class CustomerService {
 
-    private final CustomerDAO customerDAO;
+    private final CustomerDao customerDAO;
 
-    public CustomerService(@Qualifier("jdbc") CustomerDAO customerDAO) {
+    public CustomerService(@Qualifier("jdbc") CustomerDao customerDAO) {
         this.customerDAO = customerDAO;
     }
 

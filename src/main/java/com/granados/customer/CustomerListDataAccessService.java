@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository("list")
-public class CustomerListDataAccessService implements CustomerDAO {
+public class CustomerListDataAccessService implements CustomerDao {
 
     //db
     private static List<Customer> customers;
