@@ -1,0 +1,38 @@
+image: maven:3.9.2-eclipse-temurin-17-focal
+
+services:
+    - postgres:latest
+    - name: docker:dind
+      command: ["--tls=false"]
+
+variables:
+    DOCKER_HOST: "tcp://docker:2375"
+    DOCKER_TLS_CERTDIR: ""
+    DOCKER_DRIVER: overlay2
+    MAVEN_OPTS: >-
+      -Dhttps.protocols=TLSv1.2
+      -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository
+      -Dorg.slf4j.simpleLogger.showDateTime=true
+      -Djava.awt.headless=true
+    MAVEN_CLI_OPTS: >-
+      --batch-mode
+      --errors
+      --fail-at-end
+      --show-version
+      --no-transfer-progress
+    POSTGRES_DB: customer
+    POSTGRES_USER: german
+    POSTGRES_PASSWORD: password
+    SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/customer"
+
+cache:
+    paths:
+        - .m2/repository
+
+CI - Build Backend:
+    stage: build
+    rules:
+      - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+    script:
+        - cd ./backend
+        - 'mvn $MAVEN_CLI_OPTS verify'
