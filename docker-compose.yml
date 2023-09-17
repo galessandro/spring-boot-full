@@ -5,6 +5,7 @@ services:
     environment:
       POSTGRES_USER: german
       POSTGRES_PASSWORD: pass
+      POSTGRES_DB: customer
       PGDATA: /data/postgres
     volumes:
       - db:/data/postgres
