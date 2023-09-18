@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "customer-api",
-      "image": "ggranadosio/customer-api:18.09.2023.18.03.03",
+      "image": "ggranadosio/customer-api:18.09.2023.18.34.59",
       "essential": true,
       "memory": 512,
       "portMappings": [
