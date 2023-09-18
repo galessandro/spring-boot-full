@@ -18,8 +18,8 @@ public class PingPongController {
         return new PingPong("Ping");
     }
 
-    @GetMapping("/pung")
-    public PingPong getPongPung(){
-        return new PingPong("Pung");
+    @GetMapping("/pang")
+    public PingPong getPongPang(){
+        return new PingPong("Pang");
     }
 }
