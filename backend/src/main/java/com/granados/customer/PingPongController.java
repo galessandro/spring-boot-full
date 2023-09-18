@@ -12,4 +12,9 @@ public class PingPongController {
     public PingPong getPingPong(){
         return new PingPong("Pong");
     }
+
+    @GetMapping("/pong")
+    public PingPong getPongPing(){
+        return new PingPong("Ping");
+    }
 }
