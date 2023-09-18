@@ -11,9 +11,9 @@ import java.util.List;
 @Service
 public class CustomerService {
 
-    private final CustomerDAO customerDAO;
+    private final CustomerDao customerDAO;
 
-    public CustomerService(@Qualifier("jdbc") CustomerDAO customerDAO) {
+    public CustomerService(@Qualifier("jdbc") CustomerDao customerDAO) {
         this.customerDAO = customerDAO;
     }
 
@@ -32,7 +32,7 @@ public class CustomerService {
             CustomerRegistrationRequest customerRegistrationRequest) {
         //check if emails exists
         String email = customerRegistrationRequest.email();
-        if (customerDAO.existsPersonWithEmail(email)) {
+        if (customerDAO.existsCustomerWithEmail(email)) {
             throw new DuplicateResourceException(
                     "email already taken".formatted(email));
         }
@@ -49,7 +49,7 @@ public class CustomerService {
     }
 
     public void deleteCustomerById(Integer customerId){
-        if(!customerDAO.existsPersonWithId(customerId)){
+        if(!customerDAO.existsCustomerWithId(customerId)){
             throw new ResourceNotFoundException(
                     "customer with id [%s] not found".formatted(customerId)
             );
@@ -73,7 +73,7 @@ public class CustomerService {
         }
 
         if(updateRequest.email() != null && !updateRequest.email().equals(customer.getEmail())){
-            if (customerDAO.existsPersonWithEmail(updateRequest.email())){
+            if (customerDAO.existsCustomerWithEmail(updateRequest.email())){
                 throw new DuplicateResourceException("email already taken");
             }
             customer.setEmail(updateRequest.email());

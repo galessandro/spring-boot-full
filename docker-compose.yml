@@ -5,6 +5,7 @@ services:
     environment:
       POSTGRES_USER: german
       POSTGRES_PASSWORD: pass
+      POSTGRES_DB: customer
       PGDATA: /data/postgres
     volumes:
       - db:/data/postgres
@@ -13,7 +14,20 @@ services:
     networks:
       - db
     restart: unless-stopped
-
+  customer-api:
+    container_name: customer-api
+    image: ggranadosio/customer-api
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://db:5432/customer"
+    ports:
+      - "8088:8080"
+    networks:
+      - db
+    depends_on:
+      - db
+    restart: unless-stopped
+#    command:
+#      - --spring.datasource.url=jdbc:postgresql://db:5432/customer
 networks:
   db:
     driver: bridge
