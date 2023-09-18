@@ -38,14 +38,14 @@ jobs:
           --data '
           {"text":":github: https://github.com/galessandro/spring-boot-full/commit/${{ github.sha }} - ${{ github.event.head_commit.message}}"}
           '
-          ${{ secrets.SLACK_WEBHOOK_URL }}
+          ${{ secrets.TEAMS_WEBHOOK_URL }}
       - name: Send Slack Message
         run: >
           curl -X POST -H 'Content-type: application/json'
           --data '
             {"text":"Deployment started :progress_bar: :fingerscrossed:"}
           '
-          ${{ secrets.SLACK_WEBHOOK_URL }}
+          ${{ secrets.TEAMS_WEBHOOK_URL }}
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
@@ -65,7 +65,7 @@ jobs:
           --data '
             {"text":"Building with Maven :maven:"}
           '
-          ${{ secrets.SLACK_WEBHOOK_URL }}
+          ${{ secrets.TEAMS_WEBHOOK_URL }}
       - name: Build Package Push with Maven
         run: mvn -ntp -B verify -Ddocker.image.tag=${{steps.build-number.outputs.BUILD_NUMBER}} jib:build
       - name: Send Slack Message
@@ -74,7 +74,7 @@ jobs:
           --data '
             {"text":":docker: Image tag:${{steps.build-number.outputs.BUILD_NUMBER}} pushed to https://hub.docker.com/r/ggranadosio/customer-api"}
           '
-          ${{ secrets.SLACK_WEBHOOK_URL }}
+          ${{ secrets.TEAMS_WEBHOOK_URL }}
       - name: Update Dockerrun.aws.json api image tag with new build number
         run: |
           echo "Dockerrun.aws.json before updating tag"
@@ -88,7 +88,7 @@ jobs:
           --data '
             {"text":":aws: Starting deployment to Elastic Beanstalk"}
           '
-          ${{ secrets.SLACK_WEBHOOK_URL }}
+          ${{ secrets.TEAMS_WEBHOOK_URL }}
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v21
         with:
@@ -106,7 +106,7 @@ jobs:
           --data '
             {"text":":githubloading: Committing to repo https://github.com/galessandro/spring-boot-full"}
           '
-          ${{ secrets.SLACK_WEBHOOK_URL }}
+          ${{ secrets.TEAMS_WEBHOOK_URL }}
       - name: Commit and push Dockerrun.aws.json
         run: |
           git config user.name github-actions
@@ -120,7 +120,7 @@ jobs:
           --data '
             {"text":"Deployment and commit completed :github_check_mark: :party_blob: - http://customer-api-env-1.eba-7seadrnh.us-west-2.elasticbeanstalk.com/ping"}
           '
-          ${{ secrets.SLACK_WEBHOOK_URL }}
+          ${{ secrets.TEAMS_WEBHOOK_URL }}
       - name: Send Slack Message
         if: always()
         run: >
@@ -128,4 +128,4 @@ jobs:
           --data '
             {"text":"Job Status ${{ job.status }}"}
           '
-          ${{ secrets.SLACK_WEBHOOK_URL }}
+          ${{ secrets.TEAMS_WEBHOOK_URL }}
