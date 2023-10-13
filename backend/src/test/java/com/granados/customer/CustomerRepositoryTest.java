@@ -35,7 +35,8 @@ class CustomerRepositoryTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 FAKER.name().fullName(),
                 email,
-                FAKER.random().nextInt(19, 100)
+                FAKER.random().nextInt(19, 100),
+                FAKER.options().option(Gender.FEMALE, Gender.MALE)
         );
 
         underTest.save(customer);
@@ -75,7 +76,8 @@ class CustomerRepositoryTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 FAKER.name().fullName(),
                 email,
-                FAKER.random().nextInt(19, 100)
+                FAKER.random().nextInt(19, 100),
+                FAKER.options().option(Gender.FEMALE, Gender.MALE)
         );
 
         underTest.save(customer);

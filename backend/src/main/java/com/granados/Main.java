@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
 import com.granados.customer.Customer;
 import com.granados.customer.CustomerRepository;
+import com.granados.customer.Gender;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,7 +29,8 @@ public class Main {
             Customer customer = new Customer(
                     fullName,
                     email,
-                    faker.random().nextInt(5, 100)
+                    faker.random().nextInt(5, 100),
+                    faker.options().option(Gender.MALE, Gender.FEMALE)
             );
 
             customerRepository.save(customer);

@@ -5,6 +5,7 @@ import com.github.javafaker.Name;
 import com.granados.customer.Customer;
 import com.granados.customer.CustomerRegistrationRequest;
 import com.granados.customer.CustomerUpdateRequest;
+import com.granados.customer.Gender;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,8 +35,10 @@ public class CustomerIntegrationTest {
         String name = fakerName.fullName();
         String email = fakerName.lastName() + "-" + UUID.randomUUID() + "@gmail.com";
         Integer age = faker.random().nextInt(1, 100);
+        Gender gender = faker.options().option(Gender.FEMALE, Gender.MALE);
+
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                name, email, age
+                name, email, age, gender
         );
         //send a post request
         webTestClient.post()
@@ -61,7 +64,7 @@ public class CustomerIntegrationTest {
 
         // make sure that customer is present
         Customer expectedCustomer = new Customer(
-                name, email, age
+                name, email, age, gender
         );
 
         assertThat(allCustomers)
@@ -96,8 +99,10 @@ public class CustomerIntegrationTest {
         String name = fakerName.fullName();
         String email = fakerName.lastName() + "-" + UUID.randomUUID() + "@gmail.com";
         Integer age = faker.random().nextInt(1, 100);
+        Gender gender = faker.options().option(Gender.FEMALE, Gender.MALE);
+
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                name, email, age
+                name, email, age, gender
         );
         //send a post request
         webTestClient.post()
@@ -151,8 +156,10 @@ public class CustomerIntegrationTest {
         String name = fakerName.fullName();
         String email = fakerName.lastName() + "-" + UUID.randomUUID() + "@gmail.com";
         Integer age = faker.random().nextInt(1, 100);
+        Gender gender = faker.options().option(Gender.FEMALE, Gender.MALE);
+
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                name, email, age
+                name, email, age, gender
         );
         //send a post request
         webTestClient.post()
@@ -186,7 +193,7 @@ public class CustomerIntegrationTest {
         String newName = "German";
 
         CustomerUpdateRequest updateRequest = new CustomerUpdateRequest(
-                newName, null, null
+                newName, null, null, null
         );
 
         webTestClient.put()
@@ -210,7 +217,7 @@ public class CustomerIntegrationTest {
                 .getResponseBody();
 
         Customer expected = new Customer(
-                id, newName, email, age
+                id, newName, email, age, gender
         );
 
         assertThat(updatedCustomer).isEqualTo(expected);

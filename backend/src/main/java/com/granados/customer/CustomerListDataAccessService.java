@@ -18,14 +18,16 @@ public class CustomerListDataAccessService implements CustomerDao {
                 1,
                 "German",
                 "german@gmail.com",
-                28
+                28,
+                Gender.MALE
         );
 
         Customer mateo = new Customer(
                 2,
                 "Mateo",
                 "mateo@gmail.com",
-                12
+                12,
+                Gender.MALE
         );
 
 
