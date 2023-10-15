@@ -1,10 +1,10 @@
 services:
   db:
     container_name: postgres-spring
-    image: postgres
+    image: postgres:15.4
     environment:
       POSTGRES_USER: german
-      POSTGRES_PASSWORD: pass
+      POSTGRES_PASSWORD: password
       POSTGRES_DB: customer
       PGDATA: /data/postgres
     volumes:
