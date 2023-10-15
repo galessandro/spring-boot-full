@@ -3,7 +3,7 @@ import SidebarWithHeader from "./components/shared/SideBar";
 import { useEffect, useState } from "react";
 import { getCustomers } from "./services/client";
 import CardWithImage from "./components/Card";
-import DrawerForm from "./components/DrawerForm";
+import CreateCustomerDrawer from "./components/CreateCustomerDrawer";
 import { errorNotification } from "./services/notification";
 
 const App = () => {
@@ -50,7 +50,7 @@ const App = () => {
   if(err){
     return (
       <SidebarWithHeader>
-        <DrawerForm
+        <CreateCustomerDrawer
           fetchCustomers={fetchCustomers}
         />
         <Text mt={5}>Ooops there was an error</Text>
@@ -61,7 +61,7 @@ const App = () => {
   if(customers.length <= 0) {
     return (
       <SidebarWithHeader>
-        <DrawerForm
+        <CreateCustomerDrawer
           fetchCustomers={fetchCustomers}
         />
         <Text mt={5}>No customers available</Text>
@@ -71,7 +71,7 @@ const App = () => {
 
   return (
     <SidebarWithHeader>
-      <DrawerForm
+      <CreateCustomerDrawer
           fetchCustomers={fetchCustomers}
       />
       <Wrap justify={"center"} spacing={"30px"}>

@@ -21,6 +21,7 @@ import {
 import { deleteCustomer } from '../services/client';
 import { errorNotification, successNotification } from '../services/notification';
 import { useRef } from 'react';
+import UpdaterCustomerDrawer from './UpdateCustomerDrawer';
 
 export default function CardWithImage({id, name, email, age, gender, imageNumber, fetchCustomers}) {
   const randomUserGender = gender === "MALE" ? "men" : "women";
@@ -52,9 +53,11 @@ export default function CardWithImage({id, name, email, age, gender, imageNumber
     <Center py={6}>
       <Box
         maxW={'300px'}
+        minW={'300px'}
+        m={1}
         w={'full'}
         bg={useColorModeValue('white', 'gray.800')}
-        boxShadow={'2xl'}
+        boxShadow={'lg'}
         rounded={'md'}
         overflow={'hidden'}>
         <Image
@@ -87,9 +90,15 @@ export default function CardWithImage({id, name, email, age, gender, imageNumber
             <Text color={'gray.500'}>{ email }</Text>
             <Text color={'gray.500'}>Age { age } | { gender }</Text>
           </Stack>
-          <Stack m={8}>
+          <Stack direction={'row'} justify={'center'} spacing={6}>
+            <Stack>
+              <UpdaterCustomerDrawer 
+                fetchCustomers={fetchCustomers}
+                initialValues={{ name, email, age, gender }}
+                customerId={id} />
+            </Stack>
+            <Stack>
             <Button
-              mt={8}
               bg={'red.400'}
               color='white'
               rounded={'full'}
@@ -129,6 +138,7 @@ export default function CardWithImage({id, name, email, age, gender, imageNumber
                 </AlertDialogContent>
               </AlertDialogOverlay>
             </AlertDialog>
+          </Stack>
           </Stack>
         </Box>
       </Box>
