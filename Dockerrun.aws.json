@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "customer-react",
-      "image": "ggranadosio/customer-react:19.10.2023.16.58.21",
+      "image": "ggranadosio/customer-react:19.10.2023.18.08.29",
       "essential": true,
       "memory": 256,
       "portMappings": [
