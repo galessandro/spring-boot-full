@@ -15,7 +15,7 @@
     },
     {
       "name": "customer-api",
-      "image": "ggranadosio/customer-api:13.10.2023.07.07.55",
+      "image": "ggranadosio/customer-api:28.10.2023.02.15.35",
       "essential": true,
       "memory": 512,
       "portMappings": [
