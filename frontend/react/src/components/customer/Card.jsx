@@ -18,8 +18,8 @@ import {
   AlertDialogFooter,
   useDisclosure,
 } from '@chakra-ui/react'
-import { deleteCustomer } from '../services/client';
-import { errorNotification, successNotification } from '../services/notification';
+import { deleteCustomer } from '../../services/client';
+import { errorNotification, successNotification } from '../../services/notification';
 import { useRef } from 'react';
 import UpdaterCustomerDrawer from './UpdateCustomerDrawer';
 

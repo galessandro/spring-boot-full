@@ -1,8 +1,8 @@
 import { Alert, AlertIcon, Box, Button, FormLabel, Input, Select, Stack } from '@chakra-ui/react';
 import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
-import { saveCustomer } from '../services/client';
-import { successNotification, errorNotification } from '../services/notification';
+import { saveCustomer } from '../../services/client';
+import { successNotification, errorNotification } from '../../services/notification';
 
 const MyTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -48,7 +48,8 @@ const CreateCustomerForm = ({ fetchCustomers }) => {
           name: '',
           email: '',
           age: 0,
-          gender: '', // added for our select
+          gender: '',
+          password: ''
         }}
         validationSchema={Yup.object({
           name: Yup.string()
@@ -66,6 +67,10 @@ const CreateCustomerForm = ({ fetchCustomers }) => {
               ['MALE', 'FEMALE'],
               'Invalid gender'
             )
+            .required('Required'),
+          password: Yup.string()
+            .min(4, 'Must be at least 4 characters')
+            .max(20, 'Must be 20 characters or less')
             .required('Required'),
         })}
         onSubmit={(customer, { setSubmitting }) => {
@@ -119,6 +124,13 @@ const CreateCustomerForm = ({ fetchCustomers }) => {
                 <option value="MALE">Male</option>
                 <option value="FEMALE">Female</option>
             </MySelect>
+
+            <MyTextInput
+                label="Password"
+                name="password"
+                type="password"
+                placeholder="pick a secure password"
+            />
 
             <Button isDisabled={!dirty || !isValid || isSubmitting} type="submit">Submit</Button>
           </Stack>
