@@ -11,12 +11,12 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [err, setError] = useState("");
 
-  const fetchCustomers = () => {
+  const fetchCustomers = ( ) => {
     setLoading(true);
     getCustomers()
       .then((res) => {
         setCustomers(res.data);
-      })
+      }) 
       .catch((err) => {
         setError(err.response.data.message)
         errorNotification(
